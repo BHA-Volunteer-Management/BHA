@@ -10,20 +10,24 @@ from api.models import Volunteer, Contact, SEX_ENUM
 # Affixing volunteer index to e-mail because all the test data has the same e-mail and they have to be unique
 # Should probably change if/when we do an actual migration
 def create_user(user_fields, i):
-    user = User.objects.create_user(username=str(i) + user_fields['Email'],
-                                    email=str(i) + user_fields['Email'],
-                                    password='')
+    try:
+        user = User.objects.create_user(username=str(i) + user_fields['Email'],
+                                        email=str(i) + user_fields['Email'],
+                                        password='')
+    except Exception as e:
+        return None
     return user
 
 
 # Create contact object
 def create_contact(contact_fields):
     address = geocoder.google(contact_fields['Address'])
-    street_full = address.housenumber + address.street
+    xstr = lambda s: s or ""
+    street_full = xstr(address.housenumber) + xstr(address.street)
     contact = Contact.objects.create(street=street_full,
-                                     city=address.city,
-                                     state=address.state,
-                                     zip=address.postal,
+                                     city=xstr(address.city),
+                                     state=xstr(address.state),
+                                     zip=xstr(address.postal),
                                      phone_number=contact_fields['Phone'],
                                      email=contact_fields['Email'],
                                      carrier=0,
@@ -55,13 +59,17 @@ def get_volunteer_level(level_fields):
 
 # Create volunteer object
 def create_volunteer(user, contact, volunteer_level, volunteer_fields):
+    try:
+        sex = get_tuple_key(SEX_ENUM, volunteer_fields['Sex'])
+    except Exception as e:
+        sex = get_tuple_key(SEX_ENUM, "Other")
     volunteer = Volunteer.objects.create(created_at=timezone.now(),
                                          user=user,
                                          contact=contact,
                                          first_name=volunteer_fields['First Name'],
                                          last_name=volunteer_fields['Family Name'],
                                          middle_name=volunteer_fields['Middle Name'],
-                                         sex=get_tuple_key(SEX_ENUM, volunteer_fields['Sex']),
+                                         sex=sex,
                                          volunteer_level=volunteer_level,
                                          notes=volunteer_fields['Notes'],
                                          inactive=not bool(volunteer_fields['Active?']))
@@ -71,11 +79,17 @@ def create_volunteer(user, contact, volunteer_level, volunteer_fields):
 
 def import_volunteers_from_file(file):
     # Fields necessary for mapping to respective objects
+    #user = User.objects.create_user(username="test2",email="test@test.com", password='')
+    #print(dir(user))
+    #user2 = User.objects.get(username="test2")
+    #print(dir(user2))
+    #user2.delete()
+    return
     model_fields = {'user': ['Email'],
                     'volunteer': ['First Name', 'Family Name', 'Middle Name', 'Sex', 'Notes', 'Active?'],
                     'volunteer_level': ['training', 'Observation1', 'Observation2'],
                     'contact': ['Address', 'Phone', 'Email']}
-
+    
     with open(file) as csvfile:
         reader = csv.DictReader(csvfile)
 
