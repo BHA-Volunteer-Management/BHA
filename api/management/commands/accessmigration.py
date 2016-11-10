@@ -79,12 +79,6 @@ def create_volunteer(user, contact, volunteer_level, volunteer_fields):
 
 def import_volunteers_from_file(file):
     # Fields necessary for mapping to respective objects
-    #user = User.objects.create_user(username="test2",email="test@test.com", password='')
-    #print(dir(user))
-    #user2 = User.objects.get(username="test2")
-    #print(dir(user2))
-    #user2.delete()
-    return
     model_fields = {'user': ['Email'],
                     'volunteer': ['First Name', 'Family Name', 'Middle Name', 'Sex', 'Notes', 'Active?'],
                     'volunteer_level': ['training', 'Observation1', 'Observation2'],
