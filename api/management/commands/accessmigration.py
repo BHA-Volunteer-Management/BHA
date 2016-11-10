@@ -3,7 +3,7 @@ import geocoder
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from django.utils import timezone
-from api.models import Volunteer, Contact, SEX_ENUM
+from api.models import Volunteer, Contact, SEX_ENUM, VOLUNTEER_LEVEL_ENUM
 
 
 # Create user object
@@ -47,14 +47,14 @@ def get_tuple_key(_tuple, value):
 # Get volunteer level based on VOLUNTEER_LEVEL_ENUM
 # Hardcoded because why the fuck not
 def get_volunteer_level(level_fields):
-    if bool(level_fields['Observation2']):
-        return 4
-    elif bool(level_fields['Observation1']):
-        return 3
-    elif bool(level_fields['training']):
-        return 2
+    if level_fields['Observation2'].lower() == "true":
+        return VOLUNTEER_LEVEL_ENUM[4][0]
+    elif level_fields['Observation1'].lower() == "true":
+        return VOLUNTEER_LEVEL_ENUM[3][0]
+    elif level_fields['training'].lower() == "true":
+        return VOLUNTEER_LEVEL_ENUM[2][0]
     else:
-        return 1
+        return VOLUNTEER_LEVEL_ENUM[0][0]
 
 
 # Create volunteer object
