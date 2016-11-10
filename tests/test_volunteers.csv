@@ -1,0 +1,8 @@
+First Name,Family Name,Middle Name,Sex,Notes,Active?,training,Observation1,Observation2,Address,Phone,Email
+Jane,Doe,,Female,FALSE,TRUE,TRUE,TRUE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jane,Doe,,Female,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jane,Doe,My,Female,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jane,Doe,,Female,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jane,Doe,,Female,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jane,Doe,,Female,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
+Jackalope,Mcgee,,Male,FALSE,TRUE,FALSE,FALSE,66 Chancey St, New Blork,617-988-4123,volunteer@gmail.com
