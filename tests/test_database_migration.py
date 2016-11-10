@@ -11,11 +11,11 @@ class DBMigrationTests(TestCase):
     def setUp(self):
         return
 
-    def test_all_inserted(self, username, password, **kwargs):
-        f = open("./test_volunteers.csv")
+    def test_all_inserted(self, **kwargs):
+        f = open("./tests/test_volunteers.csv")
         lines = f.readlines()
         lines.pop(0)
-        for i in xrange(len(lines)):
+        for i in range(len(lines)):
             username = lines[i].split(",")[-1].rstrip()
             self.assertTrue(User.objects.filter(username=str(i)+username).exists())
         return
