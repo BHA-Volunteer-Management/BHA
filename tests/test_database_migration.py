@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, mock
 from rest_framework.test import APIClient
 from django.utils import timezone
 from api.models import Volunteer, Contact, Assignment, LANGUAGE_ENUM
@@ -28,11 +28,26 @@ female = "Female"
 male = "Male"
 other = "Other"
 
+class FakeGeocodeResult(object):
+    def __init__(self):
+        self.housenumber = '12'
+        self.street = 'Foo Bar Lane'
+        self.city = 'Boston'
+        self.state = 'MA'
+        self.postal = '02120'
+
+def fake_geocode(*args, **kwargs):
+    return FakeGeocodeResult()
+
 class DBMigrationTests(TestCase):
     
     userData = []
     assignments = []
-    def setUp(self):
+
+    @classmethod
+    def setUpClass(cls):
+        super(DBMigrationTests, cls).setUpClass()
+        geocoder.google = mock.MagicMock(return_value=FakeGeocodeResult())
         f = open("./tests/test_volunteers.csv")
         lines = f.readlines()
         f.close()
@@ -43,7 +58,7 @@ class DBMigrationTests(TestCase):
             for k,v in zip(keys,values):
                 infodict[k] = v
             infodict["idx"] = i
-            self.userData.append(infodict)
+            cls.userData.append(infodict)
 
         f = open("./tests/test_assignments.csv")
         lines = f.readlines()
@@ -55,10 +70,10 @@ class DBMigrationTests(TestCase):
             for k,v in zip(keys,values):
                 infodict[k] = v
             infodict["idx"] = i
-            self.assignments.append(infodict)
+            cls.assignments.append(infodict)
         call_command('accessmigration','tests/test_volunteers.csv','tests/test_assignments.csv')
         return
-    
+
     def test_usernames(self, **kwargs):
         for data in self.userData:
             username = str(data[idx]) + data[email]
