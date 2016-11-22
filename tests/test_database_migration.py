@@ -36,9 +36,6 @@ class FakeGeocodeResult(object):
         self.state = 'MA'
         self.postal = '02120'
 
-def fake_geocode(*args, **kwargs):
-    return FakeGeocodeResult()
-
 class DBMigrationTests(TestCase):
     
     userData = []
