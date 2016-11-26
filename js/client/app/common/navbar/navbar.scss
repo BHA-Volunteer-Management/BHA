@@ -3,8 +3,36 @@
 .navbar {
   margin-bottom: 0;
   border-radius: 0 !important;
+
+  .navbar-header {
+    width:70%;
+    text-align: center;
+
+    img{
+      float:left;
+      width:340px;
+      height:69px;
+    }
+  }
+
+  .button {
+    float:right;
+  }
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  width:67%;
+  float: right;
+  position: absolute;
 }
 
 li:hover {
    color: $darkBgColor;
+}
+
+@media only screen and (max-width: 1200px) and (min-width:761px){
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    width:60%;
+    float: right;
+  }
 }
