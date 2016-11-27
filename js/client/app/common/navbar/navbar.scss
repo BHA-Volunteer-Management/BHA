@@ -5,34 +5,48 @@
   border-radius: 0 !important;
 
   .navbar-header {
-    width:70%;
+    width: 70%;
     text-align: center;
 
-    img{
-      float:left;
-      width:340px;
-      height:69px;
+    img {
+      float: left;
+      width: 340px;
+      height: 69px;
+      padding: 5px;
     }
   }
 
   .button {
-    float:right;
+    float: right;
   }
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  width:67%;
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  width: 67%;
   float: right;
   position: absolute;
+  padding: 10px;
+
+  li:hover {
+    border-radius: 7px;
+    background-color: #5294D8;
+    transition: background 0.3s;
+  }
+
+  li:active {
+    background-color: #1E42A5;
+
+    a {
+      color: #ffffff;
+    }
+  }
 }
 
-li:hover {
-   color: $darkBgColor;
-}
-
-@media only screen and (max-width: 1200px) and (min-width:761px){
-  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    width:60%;
+@media only screen and (max-width: 1200px) and (min-width:761px) {
+  .navbar-default .navbar-collapse,
+  .navbar-default .navbar-form {
+    width: 60%;
     float: right;
   }
 }
