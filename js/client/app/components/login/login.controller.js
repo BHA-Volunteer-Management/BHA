@@ -4,6 +4,7 @@ class LoginController {
     this.email = '';
     this.password = '';
     this.error = '';
+    this.imgSrc = require('./viplogo.png');
 
     this.login = () => {
 
