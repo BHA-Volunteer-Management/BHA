@@ -2,21 +2,30 @@
   <div class="container">
     <div class="row">
       <div class="f_icon">
-        <a href="http://www.bostonhousing.org/For-Applicants/What-is-BHA-Housing/Wheelchair-Accessible-Units.aspx"> <img src="./icon_1.png" width="24" height="24" alt="Wheelchair Accessibile Units"></a>
-        <a href="http://www.bostonhousing.org/Departments/Civil-Rights.aspx"> <img src="icon_2.png" width="24" height="24" alt="Fair Housing"></a>
-        <a href="http://www.bostonhousing.org/Center-for-Community-Engagement/Language-Access-Division.aspx"> <img src="icon_3.png" width="24" height="24" alt="Language Access Division"></a>
+        <a href="http://www.bostonhousing.org/For-Applicants/What-is-BHA-Housing/Wheelchair-Accessible-Units.aspx">
+          <img id="wheelchair_accessible_units" alt="Wheelchair Accessible Units" ng-src="{{ vm.icon1 }}">
+        </a>
+        <a href="http://www.bostonhousing.org/Departments/Civil-Rights.aspx">
+          <img id="fair housing" alt="Fair Housing" ng-src="{{ vm.icon2 }}">
+        </a>
+        <a href="http://www.bostonhousing.org/Center-for-Community-Engagement/Language-Access-Division.aspx">
+           <img id ="language access division" alt="Language Access Division" ng-src="{{ vm.icon3 }}">
+         </a>
       </div>
 
       <div class="Social">
         <a href="http://www.facebook.com/bostonhousingauthority" target="_blank">
-          <img src="fb_icon.png"></a>
+            <img id="fb" ng-src="{{ vm.fb }}">
+          </a>
         <a href="https://www.flickr.com/photos/bhatoday/" target="_blank">
-          <img alt="Flickr Icon" src=" flickr.png">
+            <img id="flickr" ng-src="{{ vm.flickr }}">
         </a>
         <!-- BEGIN: Constant Contact Email List Form Button -->
-        <a class="button" href="http://visitor.r20.constantcontact.com/d.jsp?llr=gdivvgdab&amp;p=oi&amp;m=1102956896358&amp;sit=hspxkjzeb&amp;f=b556e57c-e297-4372-a513-9b80644006b4" target="_blank"><img src="ccicon.png"></a>
+        <a class="button" href="http://visitor.r20.constantcontact.com/d.jsp?llr=gdivvgdab&amp;p=oi&amp;m=1102956896358&amp;sit=hspxkjzeb&amp;f=b556e57c-e297-4372-a513-9b80644006b4" target="_blank">
+            <img id="cc" ng-src="{{ vm.cc }}">
+        </a>
         <a href="http://www.bostonhousing.org/BHA-Blog.aspx">
-          <img alt="BHA Blog Icon" src="blogicon.png">
+            <img id="blog" ng-src="{{ vm.blog }}">
         </a>
       </div>
     </div>

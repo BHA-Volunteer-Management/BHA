@@ -16,8 +16,13 @@
     text-decoration: underline;
   }
 
+  a:visited {
+    color: #ffffff;
+  }
+
   #footer_menu {
     list-style-type: none;
+    margin:  20px;
 
     li:first-child{
       border-left-style: none;
@@ -32,8 +37,8 @@
   }
 
   img {
-    width: 24px;
-    height:24px;
+    width: 40px;
+    height:40px;
     margin: 10px;
   }
 
@@ -43,5 +48,10 @@
 
   .f_icon {
     float: left;
+  }
+
+  .copyr {
+    font-size: 9px;
+    color:	#D3D3D3;
   }
 }
