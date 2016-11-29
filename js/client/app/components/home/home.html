@@ -1,6 +1,7 @@
 <main class="home">
 <div class="container">
   <div class="jumbotron">
+    <img id="viplogo" ng-src="{{ vm.imgSrc }}">
     <h2>Home</h2>
     <h4>Welcome to the Volunteer Interpreter Online Portal!</h4>
     <h5 ng-show="vm.userService.getLevel() === 0">Your application is currently pending approval.</h5>
