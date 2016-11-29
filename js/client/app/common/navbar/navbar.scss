@@ -3,18 +3,20 @@
 .navbar {
   margin-bottom: 0;
   border-radius: 0 !important;
-  background-color: #f2f2f2;
+  background-color: $bgColor;
 
   .navbar-header {
     width: 70%;
     text-align: center;
-    background-color: #f2f2f2;
+    background-color: $bgColor;
 
     img {
       float: left;
       width: 340px;
       height: 69px;
       padding: 5px;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -29,6 +31,7 @@
   float: right;
   position: absolute;
   padding: 10px;
+  margin-top: 40px;
 
   li:hover {
     border-radius: 7px;
