@@ -239,6 +239,10 @@ class Volunteer(models.Model):
     def __str__(self):
         return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)
 
+class Referral(models.Model):
+    receiver = models.OneToOneField(Volunteer, on_delete=models.CASCADE, related_name='referral_receiver')
+    sender = models.ForeignKey(Volunteer, on_delete=models.CASCADE, related_name='referral_sender')
+
 class Language(models.Model):
     can_written_translate = models.BooleanField()
     language_name = models.CharField(max_length=7, choices=tuple(LANGUAGE_ENUM.items()))
