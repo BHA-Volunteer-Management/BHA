@@ -161,7 +161,7 @@ class DBMigrationTests(TestCase):
             date = timezone.datetime.strptime(assignment["start_date"], "%m/%d/%y %H:%M:%S")
             langs = list(LANGUAGE_ENUM.keys())
             langs.sort()
-            lang = lang[int(assignment_Fields["language"])]
+            lang = langs[int(assignment_Fields["language"])]
             self.assertTrue(Assignment.objects.filter(name=assignment["name"],
                             language_name=lang,
                             start_date=date,
