@@ -1,12 +1,6 @@
 class HomeController {
-<<<<<<< HEAD
-  constructor($scope, $state, $uibModal, $http, User, Requests) {
-    $scope.friendEmail = ''
-
-=======
   constructor($state, $uibModal, $http, User, Requests) {
     this.imgSrc = require('./viplogo.png');
->>>>>>> 412c2c4... BHA-107: added logo to user home page
     this.userService = User;
     Requests.getUserAssignments(this.userService.getUser().id).then((res) => {
       this.assignments = res.data;
