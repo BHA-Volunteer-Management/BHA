@@ -346,7 +346,7 @@ class ApiEndpointsTests(TestCase):
         patch1['contact'] = {
             'street': '12 Washington St.',
             'city': 'Boston',
-            'state': 'MY',
+            'state': 'MQ',
             'zip': '02115',
             'email': self.user.username,
             'phone_number': '8824567732',
@@ -462,24 +462,15 @@ class ApiEndpointsTests(TestCase):
         self.assertEqual(response.status_code, 400)
 
     def test_referral_successfully_linked(self):
-        #self.signup('mojo@jojo.com', 'password', referrer = 'ref@ref.com')
-        #response = self.c.get('/api/volunteers/%d/' % self.user.id)
-        self.signup('fuzz@buzz.com', 'password')
-        singup_json = self.get_user_signup_form_data('fuzz@buzz.com', 'password')
-        response = self.c.post('/api/volunteers/', singup_json, format='json')
-        self.assertEqual(response.json()['first_name'], 'foo@bar.com')
-
-    #one to one integrity
-    def test_referent_has_correct_referrer(self):
-        pass
+        user1 = self.signup('fuz@buzz.com', 'password')
+        user2 = self.signup('ref@ref.com', 'password', referrer=user1.email)
+        response = self.c.get('/api/volunteers/me/')
+        self.assertEqual(user2.volunteer.referrer, user1.email)
 
     # many to one integrity
     def test_multiple_referents_single_referrer(self):
-        pass
-
-    #refering oneself
-    def test_non_cyclical_reference(self):
-        pass
-
-    def test_referent_has_existent_referring(self):
-        pass
+        user1 = self.signup('fuz@buzz.com', 'password')
+        user2 = self.signup('ref@ref.com', 'password', referrer=user1.email)
+        user3 = self.signup('refz@ref.com', 'password', referrer=user1.email)
+        self.assertEqual(user2.volunteer.referrer, user1.email)
+        self.assertEqual(user3.volunteer.referrer, user1.email)
