@@ -1,7 +1,6 @@
 class HomeController {
   constructor($scope, $state, $uibModal, $http, User, Requests) {
-    $scope.friendEmail = ''
-
+    this.imgSrc = require('./viplogo.png');
     this.userService = User;
     Requests.getUserAssignments(this.userService.getUser().id).then((res) => {
       this.assignments = res.data;

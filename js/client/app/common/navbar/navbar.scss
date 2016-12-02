@@ -3,8 +3,68 @@
 .navbar {
   margin-bottom: 0;
   border-radius: 0 !important;
+  background-color: $bgColor;
+
+  .navbar-header {
+    width: 70%;
+    text-align: center;
+    background-color: $bgColor;
+
+    img {
+      float: left;
+      width: 340px;
+      height: 69px;
+      padding: 5px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      left: 20px;
+    }
+  }
+
+  .button {
+    float: right;
+  }
 }
 
-li:hover {
-   color: $darkBgColor;
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  width: 67%;
+  float: right;
+  position: absolute;
+  padding: 10px;
+  margin-top: 40px;
+  right: 10px;
+
+  li {
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  li:hover {
+    border-radius: 7px;
+    background-color: #5294D8;
+    transition: background 0.3s;
+
+    a {
+      color: #ffffff;
+    }
+
+  }
+
+  li:active {
+    background-color: #1E42A5;
+
+    a {
+      color: #ffffff;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width:761px) {
+  .navbar-default .navbar-collapse,
+  .navbar-default .navbar-form {
+    width: 60%;
+    float: right;
+  }
 }
