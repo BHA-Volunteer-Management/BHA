@@ -96,7 +96,7 @@ class VolunteerSerializer(serializers.Serializer):
         password_data = data.pop('password')
         first_name = data.pop('first_name')
         last_name = data.pop('last_name')
-        referrer_email = data.pop('referrer')
+        referrer_email = data.pop('referrer', None)
         referral_sender_volunteer = None
         if referrer_email is not None:
             referral_sender_volunteer = Volunteer.objects.get(user=User.objects.get(email=referrer_email))
