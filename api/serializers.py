@@ -116,7 +116,7 @@ class VolunteerSerializer(serializers.Serializer):
         volunteer = Volunteer.objects.create(created_at=datetime.now(),user=user,contact=contact, **data)
 
         if referral_sender_volunteer is not None:
-            referral = Referral.objects.create(created_at=datetime.now(), sender=referral_sender_volunteer, receiver=volunteer)
+            Referral.objects.create(sender=referral_sender_volunteer, receiver=volunteer)
 
         if availability_data is not None:
             for single_av_data in availability_data:
