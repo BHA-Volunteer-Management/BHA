@@ -1,5 +1,5 @@
 class HomeController {
-  constructor($state, $uibModal, $http, User, Requests) {
+  constructor($scope, $state, $uibModal, $http, User, Requests) {
     this.imgSrc = require('./viplogo.png');
     this.userService = User;
     Requests.getUserAssignments(this.userService.getUser().id).then((res) => {
