@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 import api.email as mailer
-from .models import Volunteer, Contact, Availability, Language, Assignment
+from .models import Volunteer, Contact, Availability, Language, Assignment, Referral
 from datetime import datetime
 from django.shortcuts import get_object_or_404
 
@@ -75,7 +75,7 @@ class VolunteerSerializer(serializers.Serializer):
     hours_starting_at = serializers.DateTimeField(required=False)
     hours_ending_at = serializers.DateTimeField(required=False)
     full_name = serializers.SerializerMethodField()
-    referrer = serializers.CharField(required=False) 
+    referrer = serializers.CharField(required=False)
 
     def get_full_name(self, obj):
         return obj.first_name + ' ' + obj.last_name
@@ -96,6 +96,10 @@ class VolunteerSerializer(serializers.Serializer):
         password_data = data.pop('password')
         first_name = data.pop('first_name')
         last_name = data.pop('last_name')
+        referrer_email = data.pop('referrer')
+        referral_sender_volunteer = None
+        if referrer_email is not None:
+            referral_sender_volunteer = Volunteer.objects.get(user=User.objects.get(email=referrer_email))
         name = first_name + " " + last_name
         data['first_name'] = first_name
         data['last_name'] = last_name
@@ -110,6 +114,9 @@ class VolunteerSerializer(serializers.Serializer):
 
 
         volunteer = Volunteer.objects.create(created_at=datetime.now(),user=user,contact=contact, **data)
+
+        if referral_sender_volunteer is not None:
+            referral = Referral.objects.create(created_at=datetime.now(), sender=referral_sender_volunteer, receiver=volunteer)
 
         if availability_data is not None:
             for single_av_data in availability_data:
