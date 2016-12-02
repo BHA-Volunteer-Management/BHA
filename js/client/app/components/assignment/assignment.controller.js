@@ -7,6 +7,7 @@ class AssignmentController {
     this.userIsAdmin = User.isAdmin();
     this.enums = Enums;
     this.assignment.start_date = new Date(this.assignment.start_date);
+    this.assignment.duration = parseFloat(this.assignment.duration);
     let oldVolunteerIds = _.map(this.assignment.volunteers, 'id');
 
     this.dateOptions = {

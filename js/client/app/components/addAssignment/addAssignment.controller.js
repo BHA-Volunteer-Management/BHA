@@ -32,7 +32,7 @@ class AddAssignmentController {
       posted_by_id: User.getUser().id,
       volunteers: [],
       status: "0",
-      hours:"0"
+      duration:"0"
     };
 
     // on submit

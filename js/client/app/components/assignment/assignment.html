@@ -38,8 +38,8 @@
                 </ui-select>
               </div>
               <div class="col-sm-6">
-                <label for="assignmentHours">Hours</label>
-                <input required type="number" class="form-control" id="hours" ng-model="vm.info.hours">
+                <label for="assignmentDuration">Duration</label>
+                <input required type="number" min="0" class="form-control" id="duration" ng-model="vm.assignment.duration">
               </div>
             </div>
           </div>
@@ -136,6 +136,10 @@
         <div class="left-column__section">
           <p class="left-column__header">Status</p>
           <span ng-bind="vm.enums.assignment_status[vm.assignment.status]"></span>
+        </div>
+        <div class="left-column__section">
+          <p class="left-column__header">Duration</p>
+          <span ng-bind="vm.assignment.duration"></span>
         </div>
 
         <div class="left-column__section">
