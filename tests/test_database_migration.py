@@ -159,9 +159,9 @@ class DBMigrationTests(TestCase):
     def test_assignment_info(self, **kwargs):
         for assignment in self.assignments:
             date = timezone.datetime.strptime(assignment["start_date"], "%m/%d/%y %H:%M:%S")
-						langs = list(LANGUAGE_ENUM.keys())
-						langs.sort()
-						lang = lang[int(assignment_Fields["language"])]
+            langs = list(LANGUAGE_ENUM.keys())
+            langs.sort()
+            lang = lang[int(assignment_Fields["language"])]
             self.assertTrue(Assignment.objects.filter(name=assignment["name"],
                             language_name=lang,
                             start_date=date,
