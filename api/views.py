@@ -90,6 +90,12 @@ class VolunteerViewSet(viewsets.ModelViewSet):
         serializer = AssignmentSerializer(assignments, context={'request': request}, many=True)
         return Response(serializer.data)
 
+    @detail_route(methods=['get'])
+    def volunteer_refers(self, request, *args, **kwargs):
+        import ipdb; ipdb.set_trace()
+        volunteer = get_object_or_404(self.get_queryset(), id=int(kwargs['pk']))
+        return Response(Volunteer.objects.filter(referrer=volunteer.contact.email).count())
+
     def get_permissions(self):
         # allow non-authenticated user to create via POST
         return (AllowAny() if self.request.method == 'POST'
@@ -152,12 +158,6 @@ class ReferralViewSet(viewsets.ViewSet):
     def get_queryset(self):
         return Referral.objects.all()
 
-    @list_route(permission_classes=[IsAuthenticated])
-    def meref(self, request, *args, **kwargs):
-        volunteer = get_object_or_404(self.get_queryset(), user_id=request.user.id)
-        serializer = self.get_serializer(volunteer, context={'request': request})
-        return Response(serializer.data)
-
     def create(self, request):
         friend_email = request.data['friend']
 
@@ -176,17 +176,3 @@ class ReferralViewSet(viewsets.ViewSet):
             return Response({'status': 'Referral Sent'})
         except (BadHeaderError, ValidationError) as exn:
             return Response({'status': "Referral send failed"}, status=400)
-
-    # @detail_route(methods=['get'])
-    # def number_of_people_referred(self, request):
-    #     return '1'
-
-    # @detail_route(methods=['get'])
-    # def who_is_referrer(self):
-    #     return Referral.objects.get(receiver=Volunter.objects.get(user_id=request.user.id))
-    #
-    # @detail_route(methods=['get'])
-    # def who_is_referrer_name(self):
-    #     ref = who_is_referrer()
-    #     volunteer = get_object_or_404(Volunteer, user_id=referrer.sender)
-    #     return volunteer.first_name + " " + volunteer.last_name

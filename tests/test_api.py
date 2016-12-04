@@ -474,3 +474,10 @@ class ApiEndpointsTests(TestCase):
         user3 = self.signup('refz@ref.com', 'password', referrer=user1.email)
         self.assertEqual(user2.volunteer.referrer, user1.email)
         self.assertEqual(user3.volunteer.referrer, user1.email)
+
+    def test_referral_numbers(self):
+        user1 = self.signup('fuz@buzz.com', 'password')
+        user2 = self.signup('ref@ref.com', 'password', referrer=user1.email)
+        user3 = self.signup('refz@ref.com', 'password', referrer=user1.email)
+        response = self.c.get('/api/volunteers/{}/volunteer_refers/'.format(user1.id))
+        self.assertEqual(int(response.content), 2)
