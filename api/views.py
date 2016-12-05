@@ -92,7 +92,6 @@ class VolunteerViewSet(viewsets.ModelViewSet):
 
     @detail_route(methods=['get'])
     def volunteer_refers(self, request, *args, **kwargs):
-        import ipdb; ipdb.set_trace()
         volunteer = get_object_or_404(self.get_queryset(), id=int(kwargs['pk']))
         return Response(Volunteer.objects.filter(referrer=volunteer.contact.email).count())
 
