@@ -235,7 +235,7 @@ class Volunteer(models.Model):
     inactive = models.BooleanField(default=False)
     contact = models.OneToOneField(Contact)
     organization = models.CharField(max_length=120, null=True, blank=True)
-    referrer = models.CharField(max_length=120, null=True, blank=True)
+    referrer = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return "{} {} {}".format(self.first_name, self.middle_name, self.last_name)

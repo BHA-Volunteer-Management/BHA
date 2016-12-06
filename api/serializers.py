@@ -75,7 +75,7 @@ class VolunteerSerializer(serializers.Serializer):
     hours_starting_at = serializers.DateTimeField(required=False)
     hours_ending_at = serializers.DateTimeField(required=False)
     full_name = serializers.SerializerMethodField()
-    referrer = serializers.CharField(required=False)
+    referrer = serializers.CharField(allow_blank=True, allow_null=True, required=False)
 
     def get_full_name(self, obj):
         return obj.first_name + ' ' + obj.last_name
@@ -103,8 +103,8 @@ class VolunteerSerializer(serializers.Serializer):
         name = first_name + " " + last_name
         data['first_name'] = first_name
         data['last_name'] = last_name
-        data['referrer'] = referrer_email
-
+        if referrer_email is not None:
+            data['referrer'] = referral_sender_volunteer.user.id
         isAdmin = False
 
         user = User.objects.create(username=contact_data['email'], email=contact_data['email'], is_staff=isAdmin, is_superuser=isAdmin)
